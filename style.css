@@ -1,0 +1,146 @@
+:root {
+  --background-color: rgb(255,255,255);
+  --transparent-white-color: rgb(255,255,255, 0.2);
+  --primary-color: rgb(255,192,58);
+  --accent-color: rgb(24,24,24);
+  --transparent-accent-color: rgba(24,24,24, 0.5);
+  --heading-font: 'oswald';
+  --body-font: 'raleway';
+}
+
+body{
+  background-color: var(--background-color);
+}
+
+h1 {
+  font-size: 250%;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  font-size: 200%;
+}
+
+h3 {
+  text-align: left;
+  font-size: 150%
+}
+
+p, span {
+  font-family: var(--body-font), serif;
+}
+
+input {
+    font-family: var(--body-font), serif;
+    border: 0;
+    font-size: 120%;
+    background-color: var(--primary-color);
+    border-bottom: 5px solid var(--transparent-accent-color);
+    padding: 0.5em;
+    padding-bottom: 0;
+}
+
+button, .pseudobutton {
+  border-radius: 1em;
+  font-size: 100%;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  font-family: var(--body-font), sans-serif;
+  color: var(--background-color);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+input, div {
+  width: 100%;
+  box-sizing:border-box;
+}
+
+h1, h2 {
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-bottom: 0;
+}
+
+h1, h2, .field {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.container > div {
+  width: 40%;
+}
+
+.field{
+  font-family: var(--heading-font), sans-serif;
+  font-size: 120%;
+  padding: 0;
+  margin: 0;
+}
+
+.elem {
+  padding: 1em;
+}
+
+.added {
+  display: grid;
+  grid-gap: 1em;
+}
+
+.display{
+  padding: 5%;
+  background-color: var(--transparent-white-color);
+}
+
+.section {
+  text-align: center;
+}
+
+.large {
+  font-size: 150%;
+}
+
+.pseudobutton{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.upload {
+  text-align: center;
+  border-style: dashed;
+  border-radius: 1em;
+  border-width: 0.5em;
+  background-color: var(--transparent-white-color);
+}
+
+#vue {
+  font-family: var(--heading-font), sans-serif;
+  color: var(--accent-color);
+  width: 50%;
+  background-color: var(--primary-color);
+  padding: 5%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  body{
+    background-color: var(--primary-color);
+  }
+  #vue {
+    width: 100%;
+  }
+  .container > div {
+    width: 100%;
+  }
+}

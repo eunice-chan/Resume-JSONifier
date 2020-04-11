@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>JSONify Resume Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script src="./script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="vue">
+      <div class="upload">
+        <h2>Upload resume*</h2>
+        <label class="pseudobutton"> Select File <input v-on:change="fileSelected" type="file" style="display: none;"> </label>
+        <br>
+        <br>
+        <p v-if="filepath"> {{ filepath }} </p>
+        <p v-else> no file selected </p>
+        <p>*currently not supported due to a lack of servers</p>
+        <br>
+      </div>
+
+      <!-- all headings -->
+      <div v-for="(value, key) in resume" :key="key">
+        <h1>{{ key }}</h1>
+        <!-- all subheadings/direct input fields -->
+        <div v-if="value.constructor === Object">
+          <div v-for="(value2, key2) in value" :key="key2">
+            <!-- all direct input fields for subheading location -->
+            <div v-if="value2.constructor === Object">
+                <h2>{{ key2 }}</h2>
+                <div class="container">
+                  <div class="elem" v-for="(value3, key3) in value2" :key="key3">
+                    <input v-model="resume[key][key2][key3]"></input>
+                    <h3 class="field">{{ key3.replace(/([A-Z])/g, ' $1').trim() }}</h3>
+                  </div>
+                </div>
+            </div>
+            <!-- all direct input fields for heading -->
+            <div v-else>
+              <!-- all dynamic inputs for subheading -->
+              <div class="section" v-if="value2.constructor === Array">
+                <h2>{{ key2 }}</h2>
+                <!-- add new item -->
+                <div class="new container">
+                  <div class="elem" v-for="(input, field) in objects[key2]" :key="field">
+                      <input v-model="objects[key2][field]"></input>
+                      <h3 class="field">{{ field }}</h3>
+                  </div>
+                </div>
+                <button v-on:click="resume[key][key2].push(JSON.parse(JSON.stringify(objects[key2])))">Add</button>
+                <!-- what's already added -->
+                <div v-if="resume[key][key2].length" class="added">
+                  <div v-for="item in resume[key][key2]" class="added display">
+                    <div v-for="(itemvalue, itemkey) in item" :key="itemkey">
+                        <h3 class="field">{{ itemkey.replace(/([A-Z])/g, ' $1').trim() }}: <span>{{ itemvalue }}</span></h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end -->
+              <div class="elem" v-else>
+                <input v-model="resume[key][key2]"></input>
+                <h3 class="field">{{ key2 }}</h3>
+              </div>
+            </div>
+            </div>
+          </div>
+
+        <div class="section" v-if="value.constructor === Array">
+          <!-- add new item -->
+          <div class="new container">
+            <div class="elem" v-for="(input, field) in objects[key]" :key="field">
+                <input v-model="objects[key][field]"></input>
+                <h3 class="field">{{ field.replace(/([A-Z])/g, ' $1').trim() }}</h3>
+            </div>
+          </div>
+          <button v-on:click="resume[key].push(JSON.parse(JSON.stringify(objects[key])))">Add</button>
+          <!-- what's already added -->
+          <div v-if="value.length" class="added">
+            <div v-for="item in value" class="added display">
+              <div class="elem" v-for="(itemvalue, itemkey) in item" :key="itemkey">
+                  <h3 class="field">{{ itemkey.replace(/([A-Z])/g, ' $1').trim() }} <span>{{ itemvalue }}</span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end -->
+      </div>
+      <div class="section">
+        <button class="large" v-on:click=test>Save</button>
+      </div>
+    </div>
+  </body>
+</html>
